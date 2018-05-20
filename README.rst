@@ -41,6 +41,7 @@ This platform is a work in progress and is being developed on an "as needed" bas
 Planned Features
 ~~~~~~~~~~~~~~~~
 - **Management**: List, update and delete the deployed monitors
+- **Management**: Allow users to setup accounts, manage and invite others
 - **Notifications**: Set rule logic to alert users based on tags, news, summary, etc.
 - **Analytics**: Simple ingest statistics in the forms of graphs and other charts
 - **Usability**: Filtering of monitors by common details
