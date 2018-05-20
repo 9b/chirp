@@ -8,6 +8,17 @@ Chirp is a metadata platform built on top of Google Alerts meant to manage monit
 
 Getting Started
 ---------------
+Setup a virtual environment for Python3:
+
+   $  sudo virtualenv -p python3 venv3
+   
+Activate your container:
+
+   $ source venv3/bin/activate
+   
+Install the requirements:
+
+   $ (venv3) pip install -r requirements.txt
 
 Start redis:
 
@@ -19,11 +30,11 @@ Start RabbiqMQ:
 
 Start the Celery beat:
 
-    $ sudo celery worker -A celery_worker.celery --loglevel=info -B
+    $ (venv3) sudo celery worker -A celery_worker.celery --loglevel=info -B
 
 Start the server:
 
-    $ sudo python server.py run
+    $ (venv3) sudo python server.py run
 
 
 How Does it Work?
