@@ -1,0 +1,26 @@
+{% extends "layout/anonymous.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link href="/resources/css/authentication.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+  <div class="row">
+
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-12 pt-3">
+      <form action="/login" method="POST" class="form-signin">
+        <h2 class="form-signin-heading">Login</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control bottom" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign-in</button>
+      </form>
+    </main>
+
+  </div>
+{% endblock %}
+
+{% block bottom_import %}
+    {{ super() }}
+{% endblock %}

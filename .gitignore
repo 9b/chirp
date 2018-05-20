@@ -1,0 +1,17 @@
+*.pyc
+.DS_Store
+._*
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+.jshintrc
+bkp
+ssl-cert
+docs/s3_website.yml
+extension/Archive.zip
+venv/*
+venv3/*
+dump.rdb
+.notes
+tools/*
+celerybeat-schedule.db

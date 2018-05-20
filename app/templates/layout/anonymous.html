@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- START: Head -->
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %} - App Strap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="resources/external/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="resources/external/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/external/jquery-ui/jquery-ui.min.css" type="text/css">
+
+    <!-- JS -->
+    <script src="resources/external/jquery.min.js"></script>
+    <script src="resources/external/jquery-ui/jquery-ui.min.js"></script>
+    {% endblock %}
+  </head>
+  <!-- END: Head -->
+
+  <body>
+
+    <!-- START: Content -->
+    <div class="container-fluid">
+    {% block content %}{% endblock %}
+    </div>
+    <!-- END: Content -->
+
+    <!-- START: Bottom Imports -->
+    {% block bottom_import %}
+    <script src="resources/external/bootstrap/assets/js/vendor/popper.min.js"></script>
+    <script src="resources/external/bootstrap/js/bootstrap.min.js"></script>
+    {% endblock %}
+    <!-- END: Bottom Imports -->
+
+  </body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "layout/base.html" %}
+{% block title %}Settings{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+  <div class="row">
+
+    <main role="main" class="col-sm-6 col-md-6 pt-3">
+      <h1>Account Details</h1>
+      <form action="/account/settings/update" method="POST">
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">Username</label>
+          <input type="text" class="form-control" name="username" value="{{user.get('username')}}" disabled>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">First Name</label>
+          <input type="text" class="form-control" name="first_name" value="{{user.get('first_name')}}">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">Last Name</label>
+          <input type="text" class="form-control" name="last_name" value="{{user.get('last_name')}}">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">Email</label>
+          <input type="text" class="form-control" name="email" value="{{user.get('email')}}">
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" class="form-control" name="user_id" value="{{user.get('id')}}">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </main>
+
+    <secondary role="change-password" class="col-md-6 pt-3">
+      <h1>Change Password</h1>
+      <form action="/account/settings/change-password" method="POST">
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">New Password</label>
+          <input type="password" class="form-control" name="password" value="">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">Confirm Password</label>
+          <input type="text" class="form-control" name="password_confirm" value="">
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" class="form-control" name="user_id" value="{{user.get('id')}}">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </secondary>
+  </div>
+{% endblock %}
+{% block bottom_import %}
+    {{ super() }}
+{% endblock %}

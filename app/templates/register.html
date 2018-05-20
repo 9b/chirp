@@ -1,0 +1,42 @@
+{% extends "layout/anonymous.html" %}
+{% block title %}Register{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link href="/resources/css/authentication.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+  <div class="row">
+
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-12 pt-3">
+      <form action="/register" method="POST" class="form-signin">
+        {% if message %}
+        <div class="alert alert-danger" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+        <h2 class="form-signin-heading">Register</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="email" class="form-control" placeholder="Email address" required>
+        <label for="inputFirstName" class="sr-only">First Name</label>
+        <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+        <label for="inputLastName" class="sr-only">Last Name</label>
+        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <label for="inputPasswordConfirm" class="sr-only">Confirm Password</label>
+        <input type="password" name="password_confirm" class="form-control bottom" placeholder="Confirm Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      </form>
+    </main>
+
+  </div>
+{% endblock %}
+
+{% block bottom_import %}
+    {{ super() }}
+{% endblock %}
