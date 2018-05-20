@@ -15,3 +15,5 @@ dump.rdb
 .notes
 tools/*
 celerybeat-schedule.db
+dump/*
+celerybeat*
