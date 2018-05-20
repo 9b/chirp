@@ -49,6 +49,15 @@ $( document ).ready(function() {
                         for (var j=0; j < a.tags.length; j++) {
                             body_footer += '<span class="badge badge-secondary article-tag">' + title(a.tags[j]) + '</span> ';
                         }
+                        body_footer += ' | ';
+
+                        var text = "Chirp Alert: " + a.title;
+                        var social = ['facebook', 'twitter', 'pinterest', 'email'];
+                        for (var s=0; s < social.length; s++) {
+                            button = build_social_button(social[s], a.href, text);
+                            body_footer += button.prop('outerHTML');
+                        }
+
                         body_footer += '</span>';
 
                         var card_body = $('<div></div>')
