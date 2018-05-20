@@ -1,0 +1,174 @@
+body {
+  font-size: .875rem;
+  overflow-y: hidden;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+ * Sidebar
+ */
+
+/*.sidebar {
+  width: 60px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1; /* Behind the navbar */
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}*/
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px; /* Height of navbar */
+  height: calc(100vh - 48px);
+  padding-top: 1.5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.nav-link, .article-link {
+  font-weight: 500;
+  color: black;
+}
+
+.nav-link.active, .article-link.active {
+  color: #007bff;
+}
+
+.nav-link:hover .feather,
+.nav-link.active .feather
+.article-link:hover
+.article-link:active {
+  color: inherit;
+}
+
+/*
+ * Navbar
+ */
+
+.navbar {
+  z-index: 100;
+  height: 45px;
+}
+
+/*
+ * Utilities
+ */
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+/*
+ * Custom
+ */
+
+.flex-container {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  will-change: overflow;
+  top: 45px;
+  padding-bottom: 45px;
+}
+
+.side-nav,
+.left-pane,
+.right-pane {
+  overflow: auto;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+}
+
+.side-nav::-webkit-scrollbar,
+.left-pane::-webkit-scrollbar,
+.right-pane::-webkit-scrollbar {
+    display: none;
+}
+
+.side-nav {
+  padding: 0;
+  width: 3.5rem;
+  background-color: #f8f9fa;
+  border-right: 1px solid black;
+}
+
+.left-pane {
+  width: 25rem;
+  border-right: 1px solid black;
+  bottom: 45px;
+}
+
+.right-pane {
+  flex: 1;
+  width: 60rem;
+  background-color: #fff068;
+  background: url('/resources/img/rilakkuma.jpg');
+}
+
+.primary-pane {
+  width: 100%;
+  background-color: #fff068;
+  padding: 20px;
+  display: flex;
+}
+
+.primary-pane-content {
+  flex: 1;
+}
+
+.card {
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.last-results {
+  font-size: 0.75rem;
+}
+
+.logo {
+  width: 45px;
+}
+
+.fast {
+  border-left: 10px solid #218838;
+}
+
+.medium {
+  border-left: 10px solid #ffc107;
+}
+
+.slow {
+  border-left: 10px solid #dc3545;
+}
+
+.article-footer {
+  font-size: 12px;
+}
+
+.article-tag {
+  font-size: 10px;
+}
+
+.article-highlight {
+  background-color: #fff8ba;
+}
+
+.card-bottom {
+  border-left: 10px solid #d4d4d4;
+}
+
+.article-link-fade {
+  color: #cccccc;
+}

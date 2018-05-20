@@ -11,6 +11,9 @@ class User():
         self.email = user.get('email')
         self.first_name = user.get('first_name')
         self.last_name = user.get('last_name')
+        self.groups = user.get('groups')
+        self.first_active = user.get('first_active')
+        self.last_active = user.get('last_active')
 
     def is_authenticated(self):
         return True
@@ -19,6 +22,11 @@ class User():
         return True
 
     def is_anonymous(self):
+        return False
+
+    def is_admin(self):
+        if 'admin' in self.groups:
+            return True
         return False
 
     def get_id(self):

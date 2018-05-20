@@ -6,7 +6,7 @@ from flask import (
 )
 from flask_login import login_required, current_user
 from flask import current_app as app
-from .forms import AccountSettingsForm, ChangePasswordForm
+from .forms import AccountSettingsForm, ChangePasswordForm, AdminForm
 from ..utils.helpers import paranoid_clean
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash
@@ -17,9 +17,13 @@ from werkzeug.security import generate_password_hash
 def root():
     """Render the index page."""
     logger.debug("User: %s" % (current_user.get_id()))
-    c = mongo.db[app.config['USERS_COLLECTION']]
-    user = c.find_one({'username': current_user.get_id()})
-    return render_template('index.html', name=user.get('first_name'))
+    users = mongo.db[app.config['USERS_COLLECTION']]
+    user = users.find_one({'username': current_user.get_id()})
+    monitors = mongo.db[app.config['MONITORS_COLLECTION']]
+    results = list(monitors.find({'username': current_user.get_id()}))
+    results.sort(key=lambda x: x['checked'], reverse=True)
+    return render_template('index.html', name=user.get('first_name'),
+                           monitors=results)
 
 
 @core.route('/async-test')
@@ -41,6 +45,10 @@ def settings():
         return render_template()
     user['id'] = str(user['_id'])
     user.pop('_id', None)
+    if current_user.is_admin():
+        g = mongo.db[app.config['GLOBAL_COLLECTION']]
+        data = g.find_one(dict(), {'_id': 0})
+        user['admin'] = data
     return render_template('settings.html', user=user)
 
 
@@ -83,3 +91,19 @@ def account_change_password():
         return redirect(url_for('core.settings'))
     errors = ','.join([value[0] for value in form.errors.values()])
     return jsonify({'errors': errors})
+
+
+@core.route('/admin/settings', methods=['POST'])
+@login_required
+def admin_save_settings():
+    """Save settings for the admin accounts."""
+    form = AdminForm(request.form)
+    if not form.validate():
+        errors = ','.join([value[0] for value in form.errors.values()])
+        return jsonify({'errors': errors})
+
+    c = mongo.db[app.config['GLOBAL_COLLECTION']]
+    c.remove(dict())
+    item = {'email': form.email.data, 'password': form.password.data}
+    c.insert(item)
+    return redirect(url_for('core.settings'))

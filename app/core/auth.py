@@ -3,6 +3,7 @@ from . import core
 from .. import mongo, logger
 from ..core.forms import LoginForm, RegisterForm
 from ..models.user import User
+from ..utils.helpers import now_time
 from flask import current_app as app
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, logout_user
@@ -44,7 +45,10 @@ def register():
             "email": form.email.data,
             "first_name": form.first_name.data,
             "last_name": form.last_name.data,
-            'password': generate_password_hash(form.password.data)
+            "password": generate_password_hash(form.password.data),
+            "groups": [],
+            "first_active": now_time(),
+            "last_active": now_time()
         }
         logger.debug("User: %s" % user)
         _id = c.insert(user)

@@ -1,12 +1,12 @@
-{% extends "layout/base.html" %}
+{% extends "layout/flex-base.html" %}
 {% block title %}Settings{% endblock %}
 {% block head %}
     {{ super() }}
 {% endblock %}
 {% block content %}
-  <div class="row">
+  <div class="primary-pane">
 
-    <main role="main" class="col-sm-6 col-md-6 pt-3">
+    <div class="col-md-5 pt-3 primary-pane-content">
       <h1>Account Details</h1>
       <form action="/account/settings/update" method="POST">
         <div class="form-group">
@@ -30,9 +30,9 @@
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
-    </main>
+    </div>
 
-    <secondary role="change-password" class="col-md-6 pt-3">
+    <div class="col-md-5 pt-3 primary-pane-content">
       <h1>Change Password</h1>
       <form action="/account/settings/change-password" method="POST">
         <div class="form-group">
@@ -48,7 +48,27 @@
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
-    </secondary>
+    </div>
+
+    {% if current_user.is_admin() %}
+    <div class="col-md-5 pt-3">
+      <h1>Admin</h1>
+      <form action="/admin/settings" method="POST">
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">Email Address</label>
+          <input type="text" class="form-control" name="email" value="{{user['admin']['email']}}">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="formGroupExampleInput2">Password</label>
+          <input type="password" class="form-control" name="password" value="{{user['admin']['password']}}">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+    {% endif %}
+
   </div>
 {% endblock %}
 {% block bottom_import %}

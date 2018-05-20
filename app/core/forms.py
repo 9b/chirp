@@ -48,3 +48,21 @@ class AccountSettingsForm(Form):
     first_name = StringField('first_name', [validators.Length(min=1, max=35)])
     last_name = StringField('last_name', [validators.Length(min=1, max=35)])
     user_id = StringField('user_id', [validators.Length(min=1, max=35)])
+
+
+class MonitorForm(Form):
+
+    """Monitor form validator."""
+
+    term = StringField('term', [validators.Length(min=1, max=35)])
+    type = StringField('type', [validators.Length(min=1, max=35)])
+    category = StringField('category', [validators.Length(min=1, max=35)])
+    tags = StringField('tags')
+
+
+class AdminForm(Form):
+
+    """Admin form validator."""
+
+    email = StringField('email', [validators.Length(min=6, max=35)])
+    password = PasswordField('password', [validators.DataRequired()])

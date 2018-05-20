@@ -67,17 +67,24 @@ def create_app(debug=False):
     """Create an application context with blueprints."""
     app = Flask(__name__, static_folder='./resources')
     app.config['SECRET_KEY'] = 'RYVl4Fg3n1JLDaxWyr1m'
-    app.config['MONGO_DBNAME'] = 'app_strap'
+    app.config['MONGO_DBNAME'] = 'chirp'
     app.config['USERS_COLLECTION'] = 'accounts'
+    app.config['MONITORS_COLLECTION'] = 'monitors'
+    app.config['ARTICLES_COLLECTION'] = 'articles'
+    app.config['GLOBAL_COLLECTION'] = 'global'
     login_manager.init_app(app)
     mongo.init_app(app)
     app.config.update(
         CELERY_BROKER_URL='redis://localhost:6379',
         CELERY_RESULT_BACKEND='redis://localhost:6379',
         CELERYBEAT_SCHEDULE={
-            'heartbeat': {
-                'task': 'heartbeat',
-                'schedule': crontab(minute='*')
+            # 'heartbeat': {
+            #     'task': 'heartbeat',
+            #     'schedule': crontab(minute='*')
+            # },
+            'process_all_rss': {
+                'task': 'process_all_rss',
+                'schedule': crontab(minute='*/15')
             }
         }
     )

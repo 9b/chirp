@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- START: Head -->
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Brandon Dixon">
+
+    <title>{% block title %}{% endblock %} - Chirp</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/resources/external/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/resources/external/bootstrap/assets/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/external/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/resources/external/jquery-ui/jquery-ui.min.css" type="text/css">
+    <link href="/resources/css/alt-main.css" rel="stylesheet">
+    <link href="/resources/external/jquery-tageditor/jquery.tag-editor.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="/resources/external/jquery.min.js"></script>
+    <script src="/resources/external/jquery-ui/jquery-ui.min.js"></script>
+    {% endblock %}
+  </head>
+  <!-- END: Head -->
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/">Chirp</a>
+
+      <ul class="navbar-nav mr-auto">
+<!--         <li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li> -->
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <div class="collapse navbar-collapse" id="">
+          <div class="mt-2 mt-md-0">
+            {% if current_user.is_authenticated() %}
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a href="" class="logout" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><button class="btn btn-sm btn-secondary dropdown-toggle" type="button"><i class="fa fa-user" aria-hidden="true"></i> Account</button></a>
+                <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="/settings"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                </div>
+              </li>
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+      </form>
+    </nav>
+
+    <div class="modal fade" id="monitor-dialog" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Monitor</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/monitors/add-monitor" method="POST">
+            <div class="modal-body">
+                <div class="form-group">
+                  <label class="col-form-label" for="formGroupExampleInput">Term</label>
+                  <input type="text" class="form-control" name="term" placeholder="Chirp">
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="formGroupExampleInput2">Type</label>
+                      <select name="type" class="form-control">
+                        <option value="Exact">Exact</option>
+                        <option value="Fuzzy">Fuzzy</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="formGroupExampleInput2">Category</label>
+                      <select name="category" class="form-control">
+                        <option value="Competition">Competition</option>
+                        <option value="Partner">Partner</option>
+                        <option value="Interest">Interest</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="formGroupExampleInput2">Tags</label>
+                  <input type="text" class="tag-support" name="tags">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Monitor</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-container">
+
+      <div class="side-nav">
+        <ul class="nav flex-column" style="font-size:2em;">
+            <li class="nav-item">
+              <img class="logo" src="/resources/img/bird.gif"/>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-center" href="/activity">
+                    <i class="fa fa-bolt" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-center" href="/explorer/blockchain">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-center" href="/monitors">
+                    <i class="fa fa-database" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-center" href="#">
+                <i class="fa fa-plus-square" aria-hidden="true" data-toggle="modal" data-target="#monitor-dialog"></i>
+              </a>
+            </li>
+        </ul>
+      </div>
+
+      {% block content %}{% endblock %}
+    </div>
+
+    {% block bottom_import %}
+    <script src="/resources/external/bootstrap/assets/js/vendor/popper.min.js"></script>
+    <script src="/resources/external/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/resources/external/jquery-tageditor/jquery.caret.min.js" type="text/javascript"></script>
+    <script src="/resources/external/jquery-tageditor/jquery.tag-editor.min.js" type="text/javascript"></script>
+    <!-- Icons -->
+    <script src="/resources/external/feather.min.js"></script>
+    <script>
+      feather.replace();
+      $('.tag-support').tagEditor();
+    </script>
+    <script src="/resources/js/main.js"></script>
+    {% endblock %}
+  </body>
+</html>

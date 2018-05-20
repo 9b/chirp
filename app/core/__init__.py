@@ -10,7 +10,8 @@ core = Blueprint('core', __name__)
 from . import (
     auth,
     forms,
-    generic
+    generic,
+    monitors
 )
 
 from ..models import user

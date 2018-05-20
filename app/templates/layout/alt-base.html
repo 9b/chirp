@@ -17,7 +17,7 @@
     <link href="/resources/external/bootstrap/assets/css/sticky-footer-navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/resources/external/font-awesome/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/resources/external/jquery-ui/jquery-ui.min.css" type="text/css">
-    <link href="/resources/css/main.css" rel="stylesheet">
+    <link href="/resources/css/alt-main.css" rel="stylesheet">
 
     <!-- JS -->
     <script src="/resources/external/jquery.min.js"></script>
@@ -28,26 +28,16 @@
 
   <body>
 
-    <!-- START: Header -->
-    <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/">Chirp</a>
 
-      <!-- START: Navigation -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/">App Strap</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/register">Register</a>
-          </li>
-        </ul>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <div class="collapse navbar-collapse" id="">
           <div class="mt-2 mt-md-0">
             {% if current_user.is_authenticated %}
             <ul class="navbar-nav mr-auto">
@@ -63,37 +53,52 @@
             {% endif %}
           </div>
         </div>
-      </nav>
-      <!-- END: Navigation -->
+      </form>
+    </nav>
 
-    </header>
-    <!-- END: Header -->
-
-    <!-- START: Content -->
-    <div class="container-fluid">
-    {% block content %}{% endblock %}
-    </div>
-    <!-- END: Content -->
-
-    <!-- START: Footer -->
-    <footer class="footer navbar-dark bg-dark">
-      <div class="container">
-      {% block footer %}
-        <span class="text-muted">
-          <a class="footer-link" target="_blank" href="https://github.com/">Github</a> <i class="fa fa-heart" aria-hidden="true"></i>
-        </span>
-      {% endblock %}
+    <div class="container-fluid main-wrapper">
+      <div class="row">
+          <nav class="col-md-1 d-none d-md-block bg-light Left">
+              <div class="sidebar-sticky">
+                  <ul class="nav flex-column" style="font-size:2em;">
+                      <li class="nav-item">
+                          <a class="nav-link" href="/activity">
+                              <i class="fa fa-bolt" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/explorer/blockchain">
+                              <i class="fa fa-search" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/monitors">
+                              <i class="fa fa-database" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/monitors">
+                              <i class="fa fa-plus-square" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+          <main role="main" class="col-md-11 ml-sm-auto col-lg-11 pt-3 px-4">
+              {% block content %}{% endblock %}
+          </main>
       </div>
-    </footer>
-    <!-- END: Footer -->
+    </div>
 
-    <!-- START: Bottom Imports -->
     {% block bottom_import %}
     <script src="/resources/external/bootstrap/assets/js/vendor/popper.min.js"></script>
     <script src="/resources/external/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Icons -->
+    <script src="/resources/external/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
     <script src="/resources/js/main.js"></script>
     {% endblock %}
-    <!-- END: Bottom Imports -->
-
   </body>
 </html>
