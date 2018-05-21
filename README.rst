@@ -8,6 +8,10 @@ Chirp is a metadata platform built on top of Google Alerts meant to manage monit
 
 Getting Started
 ---------------
+Install MongoDB and ensure it's running:
+
+   https://www.mongodb.com/
+
 Setup a virtual environment for Python3:
 
    $  sudo virtualenv -p python3 venv3
