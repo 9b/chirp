@@ -1,6 +1,8 @@
 Chirp
 =====
-Chirp is a metadata platform built on top of Google Alerts meant to manage monitors, alerts and notifications.
+Chirp is a metadata platform built on top of Google Alerts meant to manage monitors, alerts and notifications. It's built on an `unofficial abstraction API`_ from the web interface, written in python. 
+
+.. _`unofficial abstraction API`: https://github.com/9b/google-alerts
 
 .. image:: screenshots/chirp-sample.png
    :alt: Demo interface of Chirp filled with alerts
