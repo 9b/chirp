@@ -51,6 +51,9 @@ def register():
             "last_active": now_time()
         }
         logger.debug("User: %s" % user)
+        user_count = c.count(dict())
+        if user_count == 0:  # Make the first user an administrator
+            user['groups'] = ['admin']
         _id = c.insert(user)
         next = request.args.get('next')
         return redirect(next or url_for('core.login'))
