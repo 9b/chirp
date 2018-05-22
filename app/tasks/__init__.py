@@ -30,6 +30,16 @@ def is_found(uuid):
     return hit
 
 
+def correct_counts():
+    """Correct the hit count post processing."""
+    articles = mongo.db[app.config['ARTICLES_COLLECTION']]
+    monitors = mongo.db[app.config['MONITORS_COLLECTION']]
+    unique = articles.distinct('feed_source', dict())
+    for link in unique:
+        count = articles.count({'feed_source': link})
+        monitors.update({'metadata.rss_link': link}, {'$set': {'hits': count}})
+
+
 def get_article(item, source, reprocess=False):
     """Take the initial set of listings and enrich the content."""
     article = dict()
@@ -109,3 +119,4 @@ def process_all_rss(reprocess=False):
                             {'$inc': {'hits': 1}})
             monitors.update({'metadata.rss_link': clean_link},
                             {'$set': {'checked': now_time()}})
+    correct_counts()
