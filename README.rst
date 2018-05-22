@@ -1,6 +1,8 @@
 Chirp
 =====
-Chirp is a metadata platform built on top of Google Alerts meant to manage monitors, alerts and notifications.
+Chirp is a metadata platform built on top of Google Alerts meant to manage monitors, alerts and notifications. It's built on an `unofficial abstraction API`_ from the web interface, written in python. 
+
+.. _`unofficial abstraction API`: https://github.com/9b/google-alerts
 
 .. image:: screenshots/chirp-sample.png
    :alt: Demo interface of Chirp filled with alerts
@@ -8,6 +10,10 @@ Chirp is a metadata platform built on top of Google Alerts meant to manage monit
 
 Getting Started
 ---------------
+Install MongoDB and ensure it's running:
+
+   https://www.mongodb.com/
+
 Setup a virtual environment for Python3:
 
    $  sudo virtualenv -p python3 venv3
@@ -48,13 +54,3 @@ Google Alerts by themselves are great for a small number of focused monitors. If
 State of the Project
 --------------------
 This platform is a work in progress and is being developed on an "as needed" basis. In other words, not all functionality is implemented and it's far from polished.
-
-Planned Features
-~~~~~~~~~~~~~~~~
-- **Management**: List, update and delete the deployed monitors
-- **Management**: Allow users to setup accounts, manage and invite others
-- **Notifications**: Set rule logic to alert users based on tags, news, summary, etc.
-- **Analytics**: Simple ingest statistics in the forms of graphs and other charts
-- **Usability**: Filtering of monitors by common details
-- **Usability**: Story limitation or pagination for cases where counts are much higher
-- **Usability**: Social buttons added to articles for quick sharing of content
