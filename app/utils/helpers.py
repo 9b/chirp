@@ -114,7 +114,10 @@ def get_sentiment(text):
     response = requests.post(url, data={'text': text})
     if response.status_code != 200:
         return "UNKNOWN"
-    loaded = json.loads(response.content)
+    try:
+        loaded = json.loads(response.content)
+    except Exception as e:
+        return "UNKNOWN"
     if loaded['label'] == 'pos':
         return "POSITIVE"
     elif loaded['label'] == 'neg':
