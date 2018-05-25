@@ -1,15 +1,15 @@
-{% extends "layout/base.html" %}
+{% extends "layout/flex-base.html" %}
 {% block title %}Home{% endblock %}
 {% block head %}
     {{ super() }}
 {% endblock %}
 {% block content %}
-  <div class="row">
-    <main role="main" class="col-sm-9 ml-sm-auto col-md-12 pt-3">
-      <h1 class="text-center">Sever Error</h1>
-      <p class="text-center">Your request resulted in an error.</p>
-    </main>
+
+  <div class="primary-pane-content">
+    <h1 class="text-center">Sever Error</h1>
+    <p class="text-center">Your request resulted in an error.</p>
   </div>
+
 {% endblock %}
 {% block bottom_import %}
     {{ super() }}

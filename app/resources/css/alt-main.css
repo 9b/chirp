@@ -126,6 +126,7 @@ body {
 
 .primary-pane-content {
   flex: 1;
+  padding-top: 10px;
 }
 
 .card {
