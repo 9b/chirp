@@ -67,6 +67,16 @@ def get_monitor_details():
     return jsonify({'success': True, 'monitor': monitor, 'articles': articles})
 
 
+@core.route('/monitors/list', methods=['GET'])
+@login_required
+def get_monitors():
+    """Render the index page."""
+    monitors = mongo.db[app.config['MONITORS_COLLECTION']]
+    results = monitors.find(dict(), {'_id': 0})
+    results = [x for x in results]
+    results.sort(key=lambda x: x['hits'], reverse=True)
+    return render_template('monitors.html', monitors=results)
+
 
 @core.route('/async-rss')
 @login_required
@@ -75,7 +85,6 @@ def trigger_rss():
     logger.debug("Executing the heartbeat task and returning")
     celery.send_task('process_all_rss', kwargs={'reprocess': False})
     return render_template('index.html', name="HEARTBEAT")
-
 
 
 @core.route('/async-reprocess')

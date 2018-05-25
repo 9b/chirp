@@ -1,0 +1,53 @@
+{% extends "layout/flex-base.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="/resources/js/monitor.js"></script>
+{% endblock %}
+{% block content %}
+
+  <div class="primary-pane-content">
+    <h2>Manage Monitors <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#monitor-dialog">New Monitor</button></h2>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Term</th>
+          <th scope="col">Created</th>
+          <th scope="col">Last Checked</th>
+          <th scope="col">Hits</th>
+          <th scope="col">Tags</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in monitors %}
+        <tr>
+          <td>{{item['term']}} <a href="{{item.get('metadata')['rss_link']}}" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i></a></td>
+          <td>{{item['created']}}</td>
+          <td>{{item['checked']}}</td>
+          <td>{{item['hits']}}</td>
+          <td>
+            {% for tag in item['tags'] %}
+            <span class="badge badge-secondary article-tag">{{tag}}</span>
+            {% endfor %}
+          </td>
+          <td>
+            <i class="fa fa-download side-pad-5 monitor-action" action="download" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Download" term-id="{{item['hashed']}}"></i>
+            <i class="fa fa-archive side-pad-5 monitor-action" action="archive" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Archive" term-id="{{item['hashed']}}"></i>
+            <i class="fa fa-trash side-pad-5 monitor-action" action="delete" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete" term-id="{{item['hashed']}}"></i>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}
+{% block bottom_import %}
+    {{ super() }}
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      });
+    </script>
+{% endblock %}

@@ -126,7 +126,8 @@ body {
 
 .primary-pane-content {
   flex: 1;
-  padding-top: 10px;
+  margin: 15px;
+  overflow-y: scroll;
 }
 
 .card {
@@ -172,4 +173,12 @@ body {
 
 .article-link-fade {
   color: #cccccc;
+}
+
+.side-pad-5 {
+  padding: 0 5px 0 5px;
+}
+
+.monitor-action {
+  cursor: pointer;
 }
