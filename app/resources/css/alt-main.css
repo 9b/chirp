@@ -182,3 +182,7 @@ body {
 .monitor-action {
   cursor: pointer;
 }
+
+.black {
+  color: black;
+}

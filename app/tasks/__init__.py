@@ -13,6 +13,7 @@ from app.utils.helpers import (
     now_time, strip_google, derive_source, get_page_content, get_tokens,
     cleaned_tokens, get_sentiment
 )
+from google_alerts import GoogleAlerts
 
 
 @celery.task(name="heartbeat")
@@ -105,7 +106,7 @@ def process_all_rss(reprocess=False):
     """Gather all RSS feeds and articles, then process."""
     sources = list()
     monitors = mongo.db[app.config['MONITORS_COLLECTION']]
-    for item in monitors.find(dict()):
+    for item in monitors.find({'active': True}):
         sources.append(item['metadata'].get('rss_link'))
 
     contents = [feedparser.parse(x) for x in sources]
@@ -120,3 +121,14 @@ def process_all_rss(reprocess=False):
             monitors.update({'metadata.rss_link': clean_link},
                             {'$set': {'checked': now_time()}})
     correct_counts()
+
+
+@celery.task(name="remove_monitor")
+def remove_monitor(monitor_id):
+    """Remove the monitor from our records and google."""
+    g = mongo.db[app.config['GLOBAL_COLLECTION']]
+    gdata = g.find_one(dict(), {'_id': 0})
+    print(monitor_id)
+    ga = GoogleAlerts(gdata['email'], gdata['password'])
+    ga.authenticate()
+    ga.delete(monitor_id)

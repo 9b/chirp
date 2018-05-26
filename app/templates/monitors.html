@@ -32,7 +32,7 @@
             {% endfor %}
           </td>
           <td>
-            <i class="fa fa-download side-pad-5 monitor-action" action="download" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Download" term-id="{{item['hashed']}}"></i>
+            <a href="/export/{{item['hashed']}}" target="_blank"><i class="fa fa-download black side-pad-5" action="download" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Download" term-id="{{item['hashed']}}"></i></a>
             <i class="fa fa-archive side-pad-5 monitor-action" action="archive" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Archive" term-id="{{item['hashed']}}"></i>
             <i class="fa fa-trash side-pad-5 monitor-action" action="delete" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete" term-id="{{item['hashed']}}"></i>
           </td>
