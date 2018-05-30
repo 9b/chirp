@@ -1,0 +1,32 @@
+{% extends "layout/flex-base.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+  <div class="primary-pane-content">
+    <div class="left-content-pane">
+      <h2>About Chirp</h2>
+      <p class="font-16">Chirp is a metadata platform built on top of Google Alerts meant to manage monitors, alerts and notifications. It's built on an <a href="https://github.com/9b/google-alerts" target="_blank">unofficial abstraction API</a> from the Google Alerts web interface, written in python. </p>
+
+      <h2>How Does It Work?</h2>
+      <p class="font-16">Chirp takes a set of Google credentials and makes use of the python Google alerts abstract library to create, update and delete monitors. Each monitor is turned into an RSS feed and then managed within Chirp. Asynchronous jobs poll the RSS feeds for new articles, summarizing the content, deriving tag data and then presenting them within the interface. All alert data is presented in one location with additional metadata paired from the user.</p>
+
+      <h2>What's the Point?</h2>
+      <p class="font-16">Google Alerts by themselves are great for a small number of focused monitors. If you want to direct the Google machine to a larger set of queries, it can quickly become overwhelming for managing and then handling alerts. Chirp was built for cases where Google Alerts was managing a lot of monitors and users needed a way to prioritize the alerting information that came back. Chirp completely abstracts away the Google Alert interface and provides a framework for collecting data on specific topics using Google scale.</p>
+
+      <h2>Who Wrote This?</h2>
+      <p class="font-16">Hi! My name is <a href="https://twitter.com/9bplus" target="_blank">Brandon Dixon</a> and I wrote Chirp. The original inspiration for this project was better management of competitive intelligence. I was leveraging Google Alerts to get updates on competition to my company, but didn't feel like it scaled to my demands. Chirp allowed me to increase my coverage while also giving me the flexibility to summarize alerts and build rich notification logic. If you're interested in helping code, consider submitting a <a href="https://github.com/9b/chirp/pulls">pull request</a> or filing an <a href="https://github.com/9b/chirp/issues">issue</a>!</p>
+    </div>
+
+    <div class="right-content-pane">
+      <img src="/resources/img/fam.jpg"/>
+    </div>
+
+  </div>
+
+{% endblock %}
+{% block bottom_import %}
+    {{ super() }}
+{% endblock %}

@@ -125,9 +125,20 @@ body {
 }
 
 .primary-pane-content {
-  flex: 1;
-  margin: 15px;
+  display: flex;
+  margin: 25px;
   overflow-y: scroll;
+}
+
+.left-content-pane {
+  flex: 1;
+  width: 75rem;
+}
+
+.right-content-pane {
+  flex: 1;
+  width: 10rem;
+  text-align: right;
 }
 
 .card {
@@ -205,4 +216,8 @@ div.card-wrapper {
 
 .card-body.filter {
   padding: 10px;
+}
+
+.font-16 {
+  font-size: 16px;
 }

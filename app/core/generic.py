@@ -25,6 +25,15 @@ def root():
     return render_template('index.html', name=user.get('first_name'),
                            monitors=results)
 
+@core.route('/about')
+@login_required
+def about():
+    """Render the about  page."""
+    logger.debug("User: %s" % (current_user.get_id()))
+    users = mongo.db[app.config['USERS_COLLECTION']]
+    user = users.find_one({'username': current_user.get_id()})
+    return render_template('about.html', name=user.get('first_name'))
+
 
 @core.route('/async-test')
 @login_required
