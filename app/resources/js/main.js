@@ -1,5 +1,17 @@
 $( document ).ready(function() {
-    console.log("Ready for JS!");
+
+    $('.filter-input').on("input", function() {
+        var needle = $(this).val().toLowerCase();
+        $('.monitor-card').each(function() {
+            var stack = $(this).text().toLowerCase();
+            if (stack.search(needle) > -1) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
 
     function read_time_class(read_time) {
         if (read_time <= 5) {
@@ -92,33 +104,5 @@ $( document ).ready(function() {
                 }
             }
         });
-    })
+    });
 });
-
-
-/**
-
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <a href="#" data-toggle="collapse" data-target="#collapseOne">Hello</a>
-    </div>
-
-    <div id="collapseOne" class="collapse"data-parent="#accordion">
-      <div class="card-body">
-        <p>hello</p>
-      </div>
-    </div>
-  </div>
-
-
-    <div class="card">
-        <div class="card-header" id="heading-w5b1m">
-            <a href="#" data-toggle="collapse" data-target="link-w5b1m" class="" aria-expanded="true">Report: Chinese government is behind a decade of hacks on software companies</a>
-        </div>
-        <div id="link-w5b1m" class="collapse show" data-parent="#accordion" style="">
-            <div class="card-body">
-                <p>Researchers from 401TRG, the threat research and analysis team at security company &lt;b&gt;ProtectWise&lt;/b&gt;, based the attribution on common network&amp;nbsp;...</p>
-            </div>
-        </div>
-    </div>
- */

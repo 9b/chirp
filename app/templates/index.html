@@ -9,10 +9,20 @@
   <!-- Left Pane Start -->
   <div class="left-pane">
 
+    <div class="card left-card card-filter">
+      <div class="card-body filter">
+        <input type="text" class="form-control filter-input" placeholder="Keyword filter...">
+      </div>
+    </div>
+
+    <div class="card-wrapper">
     {% for item in monitors %}
-    <div class="card left-card" ref="{{item['hashed']}}">
+    <div class="card left-card monitor-card" ref="{{item['hashed']}}">
       <div class="card-body">
-        <h5 class="card-title">{{item['term']}} <span class="badge badge-secondary pull-right">{{item['hits']}}</span></h5>
+        <h5 class="card-title-wrapper">
+          <span class="card-title">{{item['term']}}</span>
+          <span class="badge badge-secondary pull-right">{{item['hits']}}</span>
+        </h5>
         <h6 class="card-subtitle mb-2 text-muted last-results">Last Processed: {{item['checked']}}</h6>
         <p class="card-text">
           {% for tag in item['tags'] %}
@@ -30,6 +40,7 @@
       </div>
     </div>
     {% endfor %}
+    </div>
   </div>
   <!-- Left Pane End -->
 

@@ -186,3 +186,23 @@ body {
 .black {
   color: black;
 }
+
+.hidden {
+  display: none;
+}
+
+div.card-filter {
+  width: 25rem;
+  position: fixed;
+  background-color: #fff068;
+  border-right: 1px solid black;
+  z-index: 99999;
+}
+
+div.card-wrapper {
+  padding-top: 59px;
+}
+
+.card-body.filter {
+  padding: 10px;
+}
