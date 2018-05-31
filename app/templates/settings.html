@@ -2,6 +2,7 @@
 {% block title %}Settings{% endblock %}
 {% block head %}
     {{ super() }}
+    <script src="/resources/js/settings.js"></script>
 {% endblock %}
 {% block content %}
   <div class="primary-pane">
@@ -63,10 +64,18 @@
           <input type="password" class="form-control" name="password" value="{{user['admin']['password']}}">
         </div>
         <div class="modal-footer">
+          {% if user['admin']['email'] != '' %}
+          <button type="button" class="btn btn-secondary credential-test">Test</button>
+          {% endif %}
           <button type="submit" class="btn btn-primary">Save</button>
         </div>
       </form>
-    </div>
+
+      <div id="settings-alert" class="alert alert-dismissible fade show hidden" role="alert">
+        <span class="alert-container">
+          <strong>Bird</strong> is the word.
+        </span>
+      </div>
     {% endif %}
 
   </div>

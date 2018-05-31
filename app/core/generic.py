@@ -10,6 +10,11 @@ from .forms import AccountSettingsForm, ChangePasswordForm, AdminForm
 from ..utils.helpers import paranoid_clean
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash
+import os
+from google_alerts import GoogleAlerts
+
+CONFIG_PATH = os.path.expanduser('~/.config/google_alerts')
+SESSION_FILE = os.path.join(CONFIG_PATH, 'session')
 
 
 @core.route('/')
@@ -24,6 +29,7 @@ def root():
     results.sort(key=lambda x: x['checked'], reverse=True)
     return render_template('index.html', name=user.get('first_name'),
                            monitors=results)
+
 
 @core.route('/about')
 @login_required
@@ -58,7 +64,25 @@ def settings():
         g = mongo.db[app.config['GLOBAL_COLLECTION']]
         data = g.find_one(dict(), {'_id': 0})
         user['admin'] = data
+    user['has_session'] = True
+    if not os.path.exists(SESSION_FILE):
+        user['has_session'] = False
     return render_template('settings.html', user=user)
+
+
+@core.route('/account/settings/test', methods=['GET'])
+@login_required
+def test_account():
+    """Update account settings."""
+    logger.debug("User account settings test")
+    g = mongo.db[app.config['GLOBAL_COLLECTION']]
+    gdata = g.find_one(dict(), {'_id': 0})
+    ga = GoogleAlerts(gdata['email'], gdata['password'])
+    try:
+        ga.authenticate()
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)})
+    return jsonify({'success': True})
 
 
 @core.route('/account/settings/update', methods=['POST'])
@@ -115,4 +139,9 @@ def admin_save_settings():
     c.remove(dict())
     item = {'email': form.email.data, 'password': form.password.data}
     c.insert(item)
+    #  This will take the new credentials and load them into the config file
+    ga = GoogleAlerts(item['email'], item['password'])
+    #  Assumed a change to the credentials means killing the old session
+    if os.path.exists(SESSION_FILE):
+        os.remove(SESSION_FILE)
     return redirect(url_for('core.settings'))

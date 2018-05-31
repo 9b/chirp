@@ -227,3 +227,7 @@ div.card-wrapper {
 .font-16 {
   font-size: 16px;
 }
+
+#loader {
+  width: 21px;
+}

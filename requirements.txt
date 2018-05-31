@@ -9,7 +9,7 @@ feedparser==5.2.1
 Flask==0.12.2
 Flask-Login==0.4.1
 Flask-PyMongo==0.5.1
-google-alerts==0.1.5
+google-alerts==0.1.6
 idna==2.6
 itsdangerous==0.24
 Jinja2==2.10
