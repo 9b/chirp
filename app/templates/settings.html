@@ -6,7 +6,7 @@
 {% block content %}
   <div class="primary-pane">
 
-    <div class="col-md-5 pt-3 primary-pane-content">
+    <div class="col-md-5 pt-3 normal-pane-content">
       <h1>Account Details</h1>
       <form action="/account/settings/update" method="POST">
         <div class="form-group">
@@ -32,7 +32,7 @@
       </form>
     </div>
 
-    <div class="col-md-5 pt-3 primary-pane-content">
+    <div class="col-md-5 pt-3 normal-pane-content">
       <h1>Change Password</h1>
       <form action="/account/settings/change-password" method="POST">
         <div class="form-group">
@@ -51,7 +51,7 @@
     </div>
 
     {% if current_user.is_admin() %}
-    <div class="col-md-5 pt-3">
+    <div class="col-md-5 pt-3 normal-pane-content">
       <h1>Admin</h1>
       <form action="/admin/settings" method="POST">
         <div class="form-group">

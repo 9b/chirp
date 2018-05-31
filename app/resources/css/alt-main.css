@@ -130,6 +130,12 @@ body {
   overflow-y: scroll;
 }
 
+.normal-pane-content {
+  flex: 1;
+  margin: 15px;
+  overflow-y: scroll;
+}
+
 .left-content-pane {
   flex: 1;
   width: 75rem;
