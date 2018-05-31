@@ -213,7 +213,7 @@ div.card-filter {
   position: fixed;
   background-color: #fff068;
   border-right: 1px solid black;
-  z-index: 99999;
+  z-index: 100;
 }
 
 div.card-wrapper {
