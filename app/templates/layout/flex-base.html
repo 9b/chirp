@@ -113,22 +113,22 @@
               <a href="/"><img class="logo" src="/resources/img/bird.gif"/></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-center" href="/activity">
+                <a class="nav-link text-center" href="/activity" data-toggle="tooltip" data-placement="right" title="Policys">
                     <i class="fa fa-bolt" aria-hidden="true"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-center" href="#">
+                <a class="nav-link text-center" href="#" data-toggle="tooltip" data-placement="right" title="Search">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-center" href="/monitors/list">
+                <a class="nav-link text-center" href="/monitors/list" data-toggle="tooltip" data-placement="right" title="Monitors">
                     <i class="fa fa-database" aria-hidden="true"></i>
                 </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-center" href="#">
+              <a class="nav-link text-center" href="#" data-toggle="tooltip" data-placement="right" title="New Monitor">
                 <i class="fa fa-plus-square" aria-hidden="true" data-toggle="modal" data-target="#monitor-dialog"></i>
               </a>
             </li>
@@ -148,6 +148,7 @@
     <script>
       feather.replace();
       $('.tag-support').tagEditor();
+      $('[data-toggle="tooltip"]').tooltip();
     </script>
     <script src="/resources/js/main.js"></script>
     {% endblock %}
