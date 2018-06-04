@@ -1,6 +1,6 @@
-from . import core
-from .. import mongo, celery, logger
-from .forms import MonitorForm
+import hashlib
+import html
+import json
 from bson.objectid import ObjectId
 from flask import (
     render_template, redirect, url_for, jsonify, request, Response
@@ -9,9 +9,9 @@ from ..utils.helpers import now_time, paranoid_clean
 from flask import current_app as app
 from flask_login import login_required, current_user
 from google_alerts import GoogleAlerts
-import hashlib
-import html
-import json
+from . import core
+from .. import mongo, celery, logger
+from .forms import MonitorForm
 
 
 @core.route('/monitors/add-monitor', methods=['POST'])

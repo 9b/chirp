@@ -34,6 +34,15 @@ def to_bool(value):
     raise Exception('Invalid value for boolean conversion: ' + str(value))
 
 
+def offset_time_past(delta, str=False):
+    """Return the current datetime as a string."""
+    offset = (datetime.datetime.now() - datetime.timedelta(days=delta))
+    if str:
+        return offset.strftime("%Y-%m-%d %H:%M:%S")
+    else:
+        return offset
+
+
 def now_time(str=True):
     """Get the current time and return it back to the app."""
     if str:

@@ -9,6 +9,7 @@ core = Blueprint('core', __name__)
 
 from . import (
     auth,
+    dashboard,
     forms,
     generic,
     monitors

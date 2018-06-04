@@ -1,17 +1,18 @@
 """Generic calls within the application."""
-from . import core
-from .. import mongo, logger, celery
+import os
+from bson.objectid import ObjectId
+from flask import current_app as app
 from flask import (
-    render_template, redirect, url_for, jsonify, request, Response
+    render_template, redirect, url_for, jsonify, request
 )
 from flask_login import login_required, current_user
-from flask import current_app as app
-from .forms import AccountSettingsForm, ChangePasswordForm, AdminForm
-from ..utils.helpers import paranoid_clean
-from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash
-import os
 from google_alerts import GoogleAlerts
+from . import core
+from .. import mongo, logger, celery
+from ..utils.helpers import paranoid_clean
+from .forms import AccountSettingsForm, ChangePasswordForm, AdminForm
+
 
 CONFIG_PATH = os.path.expanduser('~/.config/google_alerts')
 SESSION_FILE = os.path.join(CONFIG_PATH, 'session')

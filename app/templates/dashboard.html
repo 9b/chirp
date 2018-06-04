@@ -1,0 +1,26 @@
+{% extends "layout/flex-base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="/resources/external/highcharts/highcharts.js"></script>
+    <script src="/resources/external/highcharts/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="/resources/external/highcharts/modules/wordcloud.js"></script>
+{% endblock %}
+{% block content %}
+
+  <div class="normal-pane-content">
+    <h2>Dashboard</h2>
+    <div id="monitor-heatmap" class="graph"></div>
+    <div class="row">
+        <div id="content-by-day-30" class="col"></div>
+        <div id="source-distribution" class="col"></div>
+    </div>
+    <div id="article-tag-cloud" class="graph"></div>
+  </div>
+
+{% endblock %}
+{% block bottom_import %}
+    {{ super() }}
+    <script src="/resources/js/dashboard.js"></script>
+{% endblock %}
