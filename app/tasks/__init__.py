@@ -22,6 +22,13 @@ def heartbeat():
     logger.debug("I am the beat.")
 
 
+def get_monitor_obj(link):
+    """Get the monitor object by the RSS link."""
+    monitors = mongo.db[app.config['MONITORS_COLLECTION']]
+    monitor = monitors.find_one({'metadata.rss_link': link}, {'_id': 0})
+    return monitor
+
+
 def is_found(uuid):
     """Check to see if we already processed the article."""
     articles = mongo.db[app.config['ARTICLES_COLLECTION']]
@@ -45,9 +52,11 @@ def get_article(item, source, reprocess=False):
     """Take the initial set of listings and enrich the content."""
     article = dict()
     encoded = item.get('link').encode('utf-8')
+    article['feed_source'] = source.replace('www.google.com', 'google.com')
     article['uuid'] = hashlib.sha256(encoded).hexdigest()
     processed = is_found(article['uuid'])
     if processed and not reprocess:
+        # logger.debug("Skipping %s", article['uuid'])
         return {'article': processed, 'from_store': True}
     article['title'] = item.get('title', None)
     href = item.get('link', None)
@@ -84,40 +93,34 @@ def get_article(item, source, reprocess=False):
                          for t in nltk.FreqDist(clean).most_common(100)]
     article['tags'] = [list(x.keys())[0] for x in article['tokens'][0:7]]
     article['sentiment'] = get_sentiment(text_content)
-    article['feed_source'] = source.replace('www.google.com', 'google.com')
     articles = mongo.db[app.config['ARTICLES_COLLECTION']]
-    if not reprocess:
+    if not reprocess or if not processed:
         try:
             articles.insert(article)
-        except:
+        except Exception as e:
             pass
-    else:
-        if not processed:
-            try:
-                articles.insert(article)
-            except:
-                pass
         articles.update({'_id': ObjectId(processed['_id'])}, {'$set': article})
-    return {'article': article, 'from_store': False}
+    monitor = get_monitor_obj(article['feed_source'])
+    return {'article': article, 'monitor': monitor, 'from_store': False}
 
 
 @celery.task(name="process_all_rss")
 def process_all_rss(reprocess=False):
     """Gather all RSS feeds and articles, then process."""
     sources = list()
+    logger.debug("Collecting sources")
     monitors = mongo.db[app.config['MONITORS_COLLECTION']]
     for item in monitors.find({'active': True}):
         sources.append(item['metadata'].get('rss_link'))
 
     contents = [feedparser.parse(x) for x in sources]
+    logger.debug("Processing sources")
     for source in contents:
         for idx, item in enumerate(source.get('entries')):
             response = get_article(item, source['href'], reprocess)
             if response['from_store'] or reprocess:
                 continue
             clean_link = response['article']['feed_source']
-            monitors.update({'metadata.rss_link': clean_link},
-                            {'$inc': {'hits': 1}})
             monitors.update({'metadata.rss_link': clean_link},
                             {'$set': {'checked': now_time()}})
     correct_counts()

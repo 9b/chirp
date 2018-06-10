@@ -75,6 +75,7 @@ def create_app(debug=False):
     login_manager.init_app(app)
     mongo.init_app(app)
     app.config.update(
+        BROKER_TRANSPORT_OPTIONS={'visibility_timeout': 3600},
         CELERY_BROKER_URL='redis://localhost:6379',
         CELERY_RESULT_BACKEND='redis://localhost:6379',
         CELERYBEAT_SCHEDULE={
