@@ -1,6 +1,6 @@
 Chirp
 =====
-Chirp is a metadata platform built on top of Google Alerts meant to manage monitors, alerts and notifications. It's built on an `unofficial abstraction API`_ from the web interface, written in python. 
+Chirp is a metadata platform built on top of Google Alerts meant to manage monitors, alerts and notifications. It's built on an `unofficial abstraction API`_ from the web interface, written in python.
 
 .. _`unofficial abstraction API`: https://github.com/9b/google-alerts
 
@@ -17,11 +17,11 @@ Install MongoDB and ensure it's running:
 Setup a virtual environment for Python3:
 
    $  sudo virtualenv -p python3 venv3
-   
+
 Activate your container:
 
    $ source venv3/bin/activate
-   
+
 Install the requirements:
 
    $ (venv3) pip install -r requirements.txt
@@ -36,7 +36,7 @@ Start RabbiqMQ:
 
 Start the Celery beat:
 
-    $ (venv3) sudo celery worker -A celery_worker.celery --loglevel=info -B
+    $ (venv3) sudo celery worker -A celery_worker.celery --loglevel=info -B --concurrency=1
 
 Start the server:
 

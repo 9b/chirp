@@ -97,7 +97,6 @@ def get_article(item, source, reprocess=False):
     if not reprocess or not processed:
         try:
             articles.insert(article)
-            continue
         except Exception as e:
             pass
         articles.update({'_id': ObjectId(processed['_id'])}, {'$set': article})
