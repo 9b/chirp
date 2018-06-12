@@ -94,9 +94,10 @@ def get_article(item, source, reprocess=False):
     article['tags'] = [list(x.keys())[0] for x in article['tokens'][0:7]]
     article['sentiment'] = get_sentiment(text_content)
     articles = mongo.db[app.config['ARTICLES_COLLECTION']]
-    if not reprocess or if not processed:
+    if not reprocess or not processed:
         try:
             articles.insert(article)
+            continue
         except Exception as e:
             pass
         articles.update({'_id': ObjectId(processed['_id'])}, {'$set': article})
