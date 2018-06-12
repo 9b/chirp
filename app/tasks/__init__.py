@@ -99,6 +99,8 @@ def get_article(item, source, reprocess=False):
             articles.insert(article)
         except Exception as e:
             pass
+    if processed:
+        print(processed)
         articles.update({'_id': ObjectId(processed['_id'])}, {'$set': article})
     monitor = get_monitor_obj(article['feed_source'])
     return {'article': article, 'monitor': monitor, 'from_store': False}
