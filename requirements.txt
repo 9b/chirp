@@ -12,7 +12,7 @@ Flask-PyMongo==0.5.1
 google-alerts==0.1.6
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.11.3
 jusText==2.2.0
 kombu==4.1.0
 lxml==4.2.1
