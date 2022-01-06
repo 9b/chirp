@@ -1,7 +1,7 @@
 amqp==2.2.2
 beautifulsoup4==4.6.0
 billiard==3.5.0.3
-celery==4.1.0
+celery==5.2.2
 certifi==2018.1.18
 chardet==3.0.4
 click==6.7
